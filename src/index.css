@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: 'DM Sans', sans-serif;
+}
+
+h1, h2, h3, .font-heading {
+  font-family: 'Playfair Display', serif;
+}
+
+body {
+  background-color: #f0fdf4;
+}
+
+/* Smooth page transitions */
+.page-enter {
+  animation: fadeSlideIn 0.35s ease forwards;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sidebar active link */
+.sidebar-link {
+  @apply flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200;
+}
+
+.sidebar-link:hover {
+  @apply bg-primary-100 text-primary-700;
+}
+
+.sidebar-link.active {
+  @apply bg-primary-600 text-white shadow-md;
+}
+
+/* Card hover effect */
+.stat-card {
+  @apply transition-transform duration-200;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f0fdf4;
+}
+::-webkit-scrollbar-thumb {
+  background: #86efac;
+  border-radius: 10px;
+}
