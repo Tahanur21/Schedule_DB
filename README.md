@@ -59,3 +59,13 @@ src/services/api.js → BASE_URL
 
 ## Color Theme
 Green & White — using DaisyUI custom theme `scheduleTheme`
+
+## Login form
+
+--- admin@test.com  pass: admin123
+
+Admin admin@test.com admin123 admin Computer Science
+
+Rahman rahman@test.com teacher123 teacher Computer Science
+
+Sadia Akter sadia@test.com student123 student Computer Science
