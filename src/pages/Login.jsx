@@ -4,12 +4,12 @@ import { loginApi } from "../services/api";
 import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
-  const [email, setEmail]       = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError]       = useState("");
-  const [loading, setLoading]   = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const { login } = useAuth();
-  const navigate  = useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +20,13 @@ const Login = () => {
       if (data.access_token) {
         login(data.user, data.access_token);
         const role = data.user.role;
-        navigate(role === "admin" ? "/admin" : role === "teacher" ? "/teacher" : "/student");
+        navigate(
+          role === "admin"
+            ? "/admin"
+            : role === "teacher"
+              ? "/teacher"
+              : "/student",
+        );
       } else {
         setError(data.error || "Login failed");
       }
@@ -39,12 +45,16 @@ const Login = () => {
           <h1 className="font-heading text-4xl text-primary-700 mb-2">
             Schedule<span className="text-primary-400">DB</span>
           </h1>
-          <p className="text-gray-500 text-sm">Smart University Scheduling System</p>
+          <p className="text-gray-500 text-sm">
+            Smart University Scheduling System
+          </p>
         </div>
 
         {/* Card */}
         <div className="bg-white rounded-3xl shadow-xl p-8 border border-primary-100">
-          <h2 className="font-heading text-2xl text-gray-800 mb-6">Welcome back</h2>
+          <h2 className="font-heading text-2xl text-gray-800 mb-6">
+            Welcome back
+          </h2>
 
           {error && (
             <div className="alert alert-error mb-4 text-sm py-2">
@@ -55,7 +65,9 @@ const Login = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="form-control">
               <label className="label">
-                <span className="label-text font-medium text-gray-700">Email</span>
+                <span className="label-text font-medium text-gray-700">
+                  Email
+                </span>
               </label>
               <input
                 type="email"
@@ -69,7 +81,9 @@ const Login = () => {
 
             <div className="form-control">
               <label className="label">
-                <span className="label-text font-medium text-gray-700">Password</span>
+                <span className="label-text font-medium text-gray-700">
+                  Password
+                </span>
               </label>
               <input
                 type="password"
@@ -86,13 +100,55 @@ const Login = () => {
               className="btn btn-primary w-full rounded-xl mt-2"
               disabled={loading}
             >
-              {loading ? <span className="loading loading-spinner loading-sm"></span> : "Sign In"}
+              {loading ? (
+                <span className="loading loading-spinner loading-sm"></span>
+              ) : (
+                "Sign In"
+              )}
             </button>
           </form>
+          {/* Demo Quick Login Buttons */}
+          <div className="divider text-xs text-gray-400">
+            or try demo account
+          </div>
+          <div className="flex flex-col gap-2">
+            {[
+              {
+                label: "Login as Admin",
+                email: "admin@test.com",
+                password: "admin123",
+              },
+              {
+                label: "Login as Teacher",
+                email: "rahman@test.com",
+                password: "teacher123",
+              },
+              {
+                label: "Login as Student",
+                email: "tahanur@test.com",
+                password: "student123",
+              },
+            ].map((d) => (
+              <button
+                key={d.label}
+                type="button"
+                className="btn btn-outline btn-sm rounded-xl"
+                onClick={() => {
+                  setEmail(d.email);
+                  setPassword(d.password);
+                }}
+              >
+                {d.label}
+              </button>
+            ))}
+          </div>
 
           <p className="text-center text-sm text-gray-500 mt-6">
             Don't have an account?{" "}
-            <Link to="/register" className="text-primary-600 font-semibold hover:underline">
+            <Link
+              to="/register"
+              className="text-primary-600 font-semibold hover:underline"
+            >
               Register
             </Link>
           </p>

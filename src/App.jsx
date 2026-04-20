@@ -6,6 +6,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Login        from "./pages/Login";
 import Register     from "./pages/Register";
 import Unauthorized from "./pages/Unauthorized";
+import UserProfile  from "./pages/UserProfile";
 
 // Admin Pages
 import AdminDashboard    from "./pages/admin/Dashboard";
@@ -14,6 +15,7 @@ import Rooms             from "./pages/admin/Rooms";
 import Courses           from "./pages/admin/Courses";
 import GenerateSchedule  from "./pages/admin/GenerateSchedule";
 import AdminSchedules    from "./pages/admin/Schedules";
+import ConflictDetection from "./pages/admin/ConflictDetection";
 
 // Teacher Pages
 import TeacherDashboard from "./pages/teacher/Dashboard";
@@ -24,6 +26,7 @@ import TeacherSchedule  from "./pages/teacher/MySchedule";
 // Student Pages
 import StudentDashboard from "./pages/student/Dashboard";
 import StudentSchedule  from "./pages/student/MySchedule";
+import CourseRegistration from "./pages/student/CourseRegistration";
 
 function App() {
   return (
@@ -35,6 +38,9 @@ function App() {
           <Route path="/login"    element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
+          
+          {/* Protected */}
+          <Route path="/profile"  element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
 
           {/* Admin Routes */}
           <Route path="/admin" element={<ProtectedRoute allowedRole="admin"><AdminDashboard /></ProtectedRoute>} />
@@ -43,6 +49,7 @@ function App() {
           <Route path="/admin/courses"   element={<ProtectedRoute allowedRole="admin"><Courses /></ProtectedRoute>} />
           <Route path="/admin/generate"  element={<ProtectedRoute allowedRole="admin"><GenerateSchedule /></ProtectedRoute>} />
           <Route path="/admin/schedules" element={<ProtectedRoute allowedRole="admin"><AdminSchedules /></ProtectedRoute>} />
+          <Route path="/admin/conflicts" element={<ProtectedRoute allowedRole="admin"><ConflictDetection /></ProtectedRoute>} />
 
           {/* Teacher Routes */}
           <Route path="/teacher"          element={<ProtectedRoute allowedRole="teacher"><TeacherDashboard /></ProtectedRoute>} />
@@ -53,6 +60,7 @@ function App() {
           {/* Student Routes */}
           <Route path="/student"          element={<ProtectedRoute allowedRole="student"><StudentDashboard /></ProtectedRoute>} />
           <Route path="/student/schedule" element={<ProtectedRoute allowedRole="student"><StudentSchedule /></ProtectedRoute>} />
+          <Route path="/student/courses"  element={<ProtectedRoute allowedRole="student"><CourseRegistration /></ProtectedRoute>} />
 
           {/* Fallback */}
           <Route path="*" element={<Navigate to="/login" replace />} />
